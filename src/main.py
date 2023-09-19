@@ -1,5 +1,6 @@
 import yfinance as yf
 import json
+import sentimentAnalyser as sa
 
 stock = input("Please enter the stock code you wish to download info on: ")
 ticker = yf.Ticker(stock)
@@ -26,3 +27,17 @@ print(f"\nDescription: {data['longBusinessSummary']}")
 newsLinks = []
 for item in news:
     newsLinks.append(item['link'])
+
+overall_sentiment = sa.get_overall_sentiment(newsLinks)
+
+if overall_sentiment is not None:
+    print('\nThe overall sentiment of the news articles is:', overall_sentiment)
+else:
+    print('\nNo valid news articles found for sentiment analysis.')
+
+if(overall_sentiment < 0.5):
+            print("Overall Sentiment: Negative")
+if(0.5 < overall_sentiment and overall_sentiment < 0.7): 
+            print("Overall Sentiment: Balanced")
+if(0.7 < overall_sentiment and overall_sentiment < 1):
+            print("Overall Sentiment: Positive")
