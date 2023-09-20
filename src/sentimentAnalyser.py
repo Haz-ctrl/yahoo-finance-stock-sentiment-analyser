@@ -1,4 +1,3 @@
-import json
 import requests
 from bs4 import BeautifulSoup
 from vaderSentiment.vaderSentiment import SentimentIntensityAnalyzer
@@ -53,14 +52,16 @@ def get_overall_sentiment(urls):
         return 0.0  # Return 0.0 if no valid URLs were processed
     
 def determineSentiment(overall_sentiment):
-    if(overall_sentiment < 0.5):
-        print("Overall sentiment: Negative")
-    elif(0.5 < overall_sentiment and overall_sentiment < 0.7): 
-        print("Overall sentiment: Balanced")
-    elif(0.7 < overall_sentiment and overall_sentiment < 1):
-        print("Overall sentiment: Positive")
+    if overall_sentiment < 0.5:
+        sentiment_label = "Negative"
+    elif overall_sentiment < 0.7:
+        sentiment_label = "Balanced"
+    elif overall_sentiment < 1:
+        sentiment_label = "Positive"
     else:
-        print("Overall sentiment: Undetermined")
+        sentiment_label = "Undetermined"
+
+    print(f"Overall sentiment: {sentiment_label}")
 
 # Example usage:
 
