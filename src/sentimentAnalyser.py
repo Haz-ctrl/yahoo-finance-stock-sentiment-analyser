@@ -28,7 +28,7 @@ def get_article_sentiment(url):
 
         # Print the compound sentiment score from the data dictionary
         compound_sentiment = data['sentiment_scores']['compound']
-        # print(f"Reading article: {url}, Sentiment analysis result: {compound_sentiment}")
+        print(f"Reading article: {url}, Sentiment analysis result: {format(compound_sentiment, '.2f')}")
         return compound_sentiment
 
     else:
@@ -48,10 +48,19 @@ def get_overall_sentiment(urls):
             valid_urls_count += 1
 
     if valid_urls_count > 0:
-        return overall_sentiment / valid_urls_count
+        return round((overall_sentiment / valid_urls_count), 2)
     else:
         return 0.0  # Return 0.0 if no valid URLs were processed
-
+    
+def determineSentiment(overall_sentiment):
+    if(overall_sentiment < 0.5):
+        print("Overall sentiment: Negative")
+    elif(0.5 < overall_sentiment and overall_sentiment < 0.7): 
+        print("Overall sentiment: Balanced")
+    elif(0.7 < overall_sentiment and overall_sentiment < 1):
+        print("Overall sentiment: Positive")
+    else:
+        print("Overall sentiment: Undetermined")
 
 # Example usage:
 
