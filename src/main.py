@@ -3,16 +3,15 @@ import sentimentAnalyser as sa
 from colorama import init, Fore, Style
 
 def print_title(title):
-    print(Fore.YELLOW + Style.BRIGHT + f"\n{'='*40}")
-    print(f"{title:^40}")
-    print(f"{'='*40}" + Style.RESET_ALL)
+    print(Fore.YELLOW + Style.BRIGHT + f"\n{'#'*40}")
+    print(Fore.YELLOW + Style.BRIGHT + f"{title:^40}")
+    print(Fore.YELLOW + Style.BRIGHT + f"{'#'*40}")
 
 def main():
     init(autoreset=True)
 
     while True:
         stock = input(Fore.CYAN + "Please enter the stock code you wish to download info on: " + Style.RESET_ALL).upper()
-
         try:
             ticker = yf.Ticker(stock)
             data = ticker.info
@@ -36,7 +35,10 @@ def main():
         try:
             value = data[key]
             if isinstance(value, (int, float)):
-                value = f"${value:,.2f}"
+                if key == "forwardPE":
+                    value = f"{value:.2f}"
+                else:
+                    value = f"${value:,.2f}"
             print(f"{label}: {Fore.GREEN}{value}{Style.RESET_ALL}")
         except KeyError:
             print(f"{label}: {Fore.RED}Data not available{Style.RESET_ALL}")
