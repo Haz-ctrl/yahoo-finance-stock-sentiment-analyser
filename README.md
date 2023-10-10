@@ -4,8 +4,8 @@ This project was a collaboration between Haz-ctrl and malik1234, where we made a
 
 
 Instructions for generating a requirements.txt file
-pip install pipreqs
-pipreqs /path/to/src
+`pip install pipreqs`
+`pipreqs /path/to/src`
 
 Installing packages from a requirements.txt file
-pip install -r requirements.txt
+`pip install -r requirements.txt`
