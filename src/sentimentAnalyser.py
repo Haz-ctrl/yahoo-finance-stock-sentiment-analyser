@@ -1,13 +1,16 @@
 import requests
 from bs4 import BeautifulSoup
 from vaderSentiment.vaderSentiment import SentimentIntensityAnalyzer
+from colorama import Fore
 
 def getArticleSentiment(url):
     # Send an HTTP GET request to the URL
     response = requests.get(url)
 
-    # Check if the request was successful (status code 200)
+    # Check if the request was successful
     if response.status_code == 200:
+        print(Fore.YELLOW + f"Reading article: {url}")
+
         # Parse the HTML content with BeautifulSoup
         html_content = response.text
         soup = BeautifulSoup(html_content, 'html.parser')
